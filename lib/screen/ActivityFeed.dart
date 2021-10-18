@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ActivityFeed extends StatefulWidget {
-  ActivityFeed({Key? key}) : super(key: key);
+  ActivityFeed();
 
   @override
   _ActivityFeedState createState() => _ActivityFeedState();

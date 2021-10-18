@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'LoginAndTabView.dart';
 
 class Profile extends StatefulWidget {
-  Profile({Key? key}) : super(key: key);
+  Profile();
 
   @override
   _ProfileState createState() => _ProfileState();

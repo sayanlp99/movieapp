@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Upload extends StatefulWidget {
-  Upload({Key? key}) : super(key: key);
+  Upload();
 
   @override
   _UploadState createState() => _UploadState();
