@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_statusbarcolor_ns/flutter_statusbarcolor_ns.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:movieapp/screen/ActivityFeed.dart';
 import 'package:movieapp/screen/Profile.dart';
@@ -82,6 +83,8 @@ class _TabViewState extends State<TabView> {
   }
 
   Scaffold signedOutUser() {
+    FlutterStatusbarcolor.setStatusBarColor(Colors.transparent);
+    FlutterStatusbarcolor.setStatusBarWhiteForeground(false);
     return Scaffold(
         body: Container(
             width: MediaQuery.of(context).size.width,
@@ -107,6 +110,8 @@ class _TabViewState extends State<TabView> {
   }
 
   Scaffold signedInUser() {
+    FlutterStatusbarcolor.setStatusBarColor(Colors.transparent);
+    FlutterStatusbarcolor.setStatusBarWhiteForeground(false);
     return Scaffold(
       body: PageView(
         children: <Widget>[ActivityFeed(), Upload(), Profile()],
@@ -134,6 +139,8 @@ class _TabViewState extends State<TabView> {
   }
 
   Container loadingUserScreen() {
+    FlutterStatusbarcolor.setStatusBarColor(Colors.transparent);
+    FlutterStatusbarcolor.setStatusBarWhiteForeground(false);
     return Container(
         color: Colors.white,
         alignment: Alignment.center,
