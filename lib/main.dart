@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movieapp/screen/TabView.dart';
+import 'package:movieapp/screen/LoginAndTabView.dart';
 
 void main() {
   runApp(MyApp());
