@@ -59,7 +59,7 @@ class _ActivityFeedState extends State<ActivityFeed> {
 
   Container movieCard(String name, String director, String picurl) {
     return Container(
-        padding: EdgeInsets.all(20),
+        padding: EdgeInsets.all(10),
         child: Container(
             width: 300,
             height: 170,
