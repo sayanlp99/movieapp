@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:confirm_dialog/confirm_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:movieapp/constants/app_color.dart';
 import 'package:movieapp/screen/LoginAndTabView.dart';
@@ -45,8 +46,8 @@ class _ActivityFeedState extends State<ActivityFeed> {
                                 snapshot.data!.docs.map((DocumentSnapshot ds) {
                           Map<String, dynamic> data =
                               ds.data() as Map<String, dynamic>;
-                          return movieCard(
-                              data['name'], data['director'], data['picUrl']);
+                          return movieCard(data['name'], data['director'],
+                              data['picUrl'], ds.id.toString());
                         }).toList()))
                       ]);
                 }
@@ -57,7 +58,8 @@ class _ActivityFeedState extends State<ActivityFeed> {
     );
   }
 
-  Container movieCard(String name, String director, String picurl) {
+  Container movieCard(
+      String name, String director, String picurl, String documentId) {
     return Container(
         padding: EdgeInsets.all(10),
         child: Container(
@@ -95,7 +97,26 @@ class _ActivityFeedState extends State<ActivityFeed> {
                               director,
                             ))
                       ],
-                    )
+                    ),
+                    Spacer(),
+                    IconButton(
+                        onPressed: () async {
+                          if (await confirm(
+                            context,
+                            content: Text('Would you like to delete?'),
+                          )) {
+                            print('pressedOK');
+                            FirebaseFirestore.instance
+                                .collection("movie")
+                                .doc(documentId)
+                                .delete();
+                          }
+                          print('pressedCancel');
+                        },
+                        icon: Icon(
+                          Icons.delete,
+                          color: red,
+                        ))
                   ],
                 ),
               ]),
