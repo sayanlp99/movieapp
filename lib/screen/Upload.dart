@@ -21,8 +21,9 @@ class _UploadState extends State<Upload> {
   final TextEditingController _directorController = TextEditingController();
   UploadTask? task;
   File? file;
-  late final String picUrl;
+  late String picUrl;
   bool submitting = false;
+  bool error = false;
 
   @override
   Widget build(BuildContext context) {
@@ -70,6 +71,8 @@ class _UploadState extends State<Upload> {
               },
               child: Text("Add")),
           SizedBox(height: 20),
+          Container(child: error == true ? Text("Enter all data") : Text("")),
+          SizedBox(height: 20),
           Container(
               child:
                   submitting == true ? CircularProgressIndicator() : Text("")),
@@ -79,13 +82,26 @@ class _UploadState extends State<Upload> {
   }
 
   void submitData(String text, String text2, String pic, String user) async {
-    movieRef
-        .add({"name": text, "director": text2, "picUrl": pic, "user": user});
-    Navigator.of(this.context)
-        .push(MaterialPageRoute(builder: (context) => TabView()));
-    setState(() {
-      submitting = false;
-    });
+    if (text.isEmpty ||
+        text2.isEmpty ||
+        pic.isEmpty ||
+        text == "" ||
+        text2 == "" ||
+        pic == "" ||
+        pic == "Empty") {
+      setState(() {
+        error = true;
+        submitting = false;
+      });
+    } else {
+      movieRef
+          .add({"name": text, "director": text2, "picUrl": pic, "user": user});
+      Navigator.of(this.context)
+          .push(MaterialPageRoute(builder: (context) => TabView()));
+      setState(() {
+        submitting = false;
+      });
+    }
   }
 
   Future selectFile() async {
