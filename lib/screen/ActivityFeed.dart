@@ -37,6 +37,12 @@ class _ActivityFeedState extends State<ActivityFeed> {
                   );
                 }
 
+                if (snapshot.data!.docs.isEmpty) {
+                  return Center(
+                    child: Text("Enter movie details in the Upload tab"),
+                  );
+                }
+
                 if (snapshot.hasData) {
                   return CustomScrollView(
                       scrollDirection: Axis.vertical,
