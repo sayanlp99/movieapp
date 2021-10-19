@@ -19,14 +19,13 @@ class Upload extends StatefulWidget {
 class _UploadState extends State<Upload> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _directorController = TextEditingController();
-  final TextEditingController _picUrlController = TextEditingController();
   UploadTask? task;
   File? file;
   late final String picUrl;
+  bool submitting = false;
 
   @override
   Widget build(BuildContext context) {
-    final fileName = file != null ? basename(file!.path) : 'No File Selected';
     return Scaffold(
         body: SingleChildScrollView(
       child: SafeArea(
@@ -46,25 +45,34 @@ class _UploadState extends State<Upload> {
                 decoration: InputDecoration(
                     labelText: "Director Name", border: OutlineInputBorder()),
               )),
-          // Container(
-          //     margin: EdgeInsets.all(20),
-          //     child: TextField(
-          //       controller: _picUrlController,
-          //       decoration: InputDecoration(
-          //           labelText: "Pic url", border: OutlineInputBorder()),
-          //     )),
-          ElevatedButton(
-              onPressed: () {
-                selectFile();
-              },
-              child: Text("Add image")),
+          Container(
+              margin: EdgeInsets.all(20),
+              child: Row(children: [
+                Spacer(),
+                ElevatedButton(
+                    onPressed: () {
+                      selectFile();
+                    },
+                    child: Row(children: [
+                      Icon(Icons.collections),
+                      Text("Add image")
+                    ])),
+                Spacer()
+              ])),
           ElevatedButton(
               onPressed: () async {
+                setState(() {
+                  submitting = true;
+                });
                 picUrl = await uploadFile();
                 submitData(_nameController.text, _directorController.text,
                     picUrl, googleSignIn.currentUser!.email.toString());
               },
-              child: Text("Add"))
+              child: Text("Add")),
+          SizedBox(height: 20),
+          Container(
+              child:
+                  submitting == true ? CircularProgressIndicator() : Text("")),
         ],
       )),
     ));
@@ -73,8 +81,11 @@ class _UploadState extends State<Upload> {
   void submitData(String text, String text2, String pic, String user) async {
     movieRef
         .add({"name": text, "director": text2, "picUrl": pic, "user": user});
-    // Navigator.of(context)
-    //     .push(MaterialPageRoute(builder: (context) => TabView()));
+    Navigator.of(this.context)
+        .push(MaterialPageRoute(builder: (context) => TabView()));
+    setState(() {
+      submitting = false;
+    });
   }
 
   Future selectFile() async {
