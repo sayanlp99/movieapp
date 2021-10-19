@@ -132,8 +132,7 @@ class _TabViewState extends State<TabView> {
                   size: 35.0,
                 ),
                 label: "Upload"),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.supervised_user_circle), label: "profile"),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
           ]),
     );
   }
