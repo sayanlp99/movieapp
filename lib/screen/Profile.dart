@@ -1,3 +1,4 @@
+import 'package:confirm_dialog/confirm_dialog.dart';
 import 'package:flutter/material.dart';
 
 import 'LoginAndTabView.dart';
@@ -11,10 +12,13 @@ class Profile extends StatefulWidget {
 
 ElevatedButton logout(context) {
   return ElevatedButton(
-    onPressed: () {
-      googleSignIn.signOut();
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => TabView()));
+    onPressed: () async {
+      if (await confirm(context,
+          title: Text("Logout"), content: Text('Sure to logout?'))) {
+        googleSignIn.signOut();
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => TabView()));
+      }
     },
     child: Text("Logout"),
   );

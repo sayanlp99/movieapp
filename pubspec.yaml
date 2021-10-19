@@ -17,6 +17,7 @@ dependencies:
   flutter_statusbarcolor_ns: ^0.3.0-nullsafety
   firebase_storage: ^10.0.5
   file_picker: ^4.1.4
+  confirm_dialog: ^1.0.0
 
 
 dev_dependencies:
