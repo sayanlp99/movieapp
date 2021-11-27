@@ -2,10 +2,10 @@
 
 A Flutter project to keep track of movies watched.
 
-Features:
-• Cross Platform Application, works on Web, Android and iOS
-• Use Firebase authentication for user authentication and session management.
-• Firebase Firestore is used to store all the data
+Features:<br/>
+• Cross Platform Application, works on Web, Android and iOS.<br/>
+• Use Firebase authentication for user authentication and session management.<br/>
+• Firebase Firestore is used to store all the data.<br/>
 
 | Android        | iOS           |
 | ------------- |:-------------:|
